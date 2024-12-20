@@ -1,0 +1,10 @@
+.informacion {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .informacion ul {
+    list-style-type: square;
+    color: #2a7a1b;
+  }
+  

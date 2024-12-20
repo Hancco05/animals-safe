@@ -1,0 +1,12 @@
+.galeria {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .imagenes img {
+    width: 200px;
+    height: auto;
+    margin: 10px;
+    border-radius: 10px;
+  }
+  
