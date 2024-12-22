@@ -1,0 +1,410 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animals Safe</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'assets/logo.png' %}" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4; /* Fondo de la página más claro */
+        }
+
+        /* General Styles */
+        * {
+            box-sizing: inherit;
+        }
+
+        /* Header */
+        .header {
+            background-color: #add8e6; /* Light green color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 20px;
+            position: relative;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2rem;
+            margin: 0;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px; /* Increased gap between social icons */
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            margin-right: 30px; /* Slightly shifted to the left */
+        }
+
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+        .logo img {
+            width: 150px;
+            height: auto;
+        }
+
+        /* Carrusel */
+        .carousel {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 630px;
+            object-fit: cover;
+            filter: brightness(50%); /* Oscurece la imagen */
+        }
+
+        .carousel-description {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            width: 80%;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Títulos debajo de las imágenes */
+        .carousel-description h3 {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-buttons button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .carousel-buttons button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Descripción */
+        .description {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .description-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+
+        .description-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 300px;
+        }
+
+        .description-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        p {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        /* Formulario de contacto */
+        .contact-form-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        /* Formulario */
+        .contact-form {
+            background-color: #808080; /* Plomo */
+            padding: 30px;
+            border-radius: 8px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .contact-form h2 {
+            color: white;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .contact-form label {
+            display: block;
+            color: white;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .contact-form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .contact-form button:hover {
+            background-color: #45a049;
+        }
+
+        /* Fondo negro debajo del formulario */
+        .form-background {
+            background-color: #000000; /* Fondo negro */
+            padding: 50px 0; /* Se ajusta el padding para que cubra toda la sección */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .carousel-buttons button {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .description {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .description-text, .description-image {
+                padding: 10px;
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with logo and social icons -->
+    <div class="header">
+        <div class="logo">
+            <img src="{% static 'assets/logo.png' %}" alt="Imagen de Descripción">
+        </div>
+        <div class="social-icons">
+            <a href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
+            <a href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"></a>
+        </div>
+    </div>
+
+    <!-- Carrusel -->
+    <div class="carousel">
+        <div class="carousel-images">
+            <div class="carousel-slide">
+                <img src="{% static 'assets/cat.jpg' %}" alt="Gatito">
+                <div class="carousel-description">
+                    <h3>Gatito</h3>
+                    <h5>El gato es un animal muy independiente, pero necesita cuidados regulares para mantenerse sano y feliz.</h5>
+                </div>
+            </div>
+            <div class="carousel-slide">
+                <img src="{% static 'assets/dog.jpg' %}" alt="Perrito">
+                <div class="carousel-description">
+                    <h3>Perrito</h3>
+                    <h5>Los perros son compañeros leales que requieren ejercicio y afecto para desarrollarse de manera saludable.</h5>
+                </div>
+            </div>
+            <div class="carousel-slide">
+                <img src="{% static 'assets/focca.jpg' %}" alt="Foquita">
+                <div class="carousel-description">
+                    <h3>Foquita</h3>
+                    <h5>Las focas son animales marinos que necesitan un ambiente limpio y seguro para vivir, con acceso a comida adecuada.</h5>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-buttons">
+            <button onclick="prevSlide()">&#10094;</button>
+            <button onclick="nextSlide()">&#10095;</button>
+        </div>
+    </div>
+
+    <!-- Descripción -->
+    <div class="description">
+        <div class="description-text">
+            <h2>Cuidado de los Animales</h2>
+            <p>El cuidado de los animales es fundamental para mantener su salud física y emocional. Cada tipo de animal tiene necesidades específicas, desde su alimentación hasta su interacción con los seres humanos y el ambiente que lo rodea. Es importante ser responsables y ofrecerles un entorno adecuado y amoroso.</p>
+        </div>
+        <div class="description-image">
+            <img src="{% static 'assets/1.png' %}" alt="Imagen de Descripción">
+        </div>
+    </div>
+
+    <!-- Fondo negro debajo del formulario -->
+    <div class="form-background">
+        <!-- Formulario de Contacto -->
+        <div class="contact-form">
+            <h2>Contacto</h2>
+            <form action="/submit_form" method="POST" enctype="multipart/form-data">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="subject">Asunto:</label>
+                <input type="text" id="subject" name="subject" required>
+
+                <label for="email">Correo:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="description">Descripción:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+
+                <label for="file">Adjuntar archivo:</label>
+                <input type="file" id="file" name="file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx" required>
+
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="chatbot-container" style="width: 300px; border: 1px solid #ccc; padding: 10px; position: fixed; bottom: 10px; right: 10px; background: #f9f9f9;">
+        <div id="chatbot-messages" style="height: 200px; overflow-y: auto; margin-bottom: 10px; background: #fff; padding: 5px; border: 1px solid #ddd;"></div>
+        <input id="chatbot-input" type="text" placeholder="Escribe tu mensaje..." style="width: 100%; padding: 5px;">
+        <button id="chatbot-send" style="width: 100%; margin-top: 5px; padding: 5px;">Enviar</button>
+    </div>
+    
+    <script>
+        const messagesContainer = document.getElementById("chatbot-messages");
+        const inputField = document.getElementById("chatbot-input");
+        const sendButton = document.getElementById("chatbot-send");
+    
+        function addMessageToChat(text, sender) {
+            const message = document.createElement("div");
+            message.textContent = text;
+            message.style.margin = "5px 0";
+            message.style.textAlign = sender === "bot" ? "left" : "right";
+            messagesContainer.appendChild(message);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight; // Scroll al final
+        }
+    
+        sendButton.addEventListener("click", () => {
+            const userMessage = inputField.value.trim();
+            if (!userMessage) return;
+    
+            addMessageToChat(userMessage, "user");
+            inputField.value = "";
+    
+            // Enviar el mensaje al servidor
+            fetch("/chatbot/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userMessage }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    addMessageToChat(data.reply, "bot");
+                })
+                .catch((error) => {
+                    addMessageToChat("Error al conectar con el servidor.", "bot");
+                    console.error(error);
+                });
+        });
+    </script>
+    
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+
+        function showSlide(index) {
+            if (index >= slides.length) currentIndex = 0;
+            else if (index < 0) currentIndex = slides.length - 1;
+            else currentIndex = index;
+            document.querySelector('.carousel-images').style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function nextSlide() {
+            showSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentIndex - 1);
+        }
+
+        showSlide(currentIndex); // Show the first slide initially
+    </script>
+</body>
+</html>
